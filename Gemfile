@@ -6,6 +6,7 @@ gem 'sass-rails',   '5.0.6'
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap_form'
 
 gem 'uglifier',     '3.0.0'
 gem 'coffee-rails', '4.2.1'
