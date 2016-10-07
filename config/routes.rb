@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   	get 'feed', to: 'users#feed'
 
     authenticated :user do
-      root 'users#feed', as: :authenticated_root
+      root 'pages#index', as: :authenticated_root
     end
 
     unauthenticated do
