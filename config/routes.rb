@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   devise_scope :user do
   	get 'register', to: 'devise/registrations#new'
   	get 'login', to: 'devise/sessions#new'
-  	get 'feed', to: 'users#feed'
+  	get 'index', to: 'pages#index'
+    get 'profile', to: 'users#show'
 
     authenticated :user do
       root 'pages#index', as: :authenticated_root
