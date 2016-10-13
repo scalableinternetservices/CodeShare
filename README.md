@@ -18,3 +18,5 @@
 2. http://localhost:3000/register
 3. http://localhost:3000/login
 4. http://localhost:3000/feed
+5. http://localhost:3000/profile
+6. http://localhost:3000/posts/new
