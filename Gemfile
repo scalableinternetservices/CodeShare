@@ -14,6 +14,10 @@ gem 'jquery-rails', '4.1.1'
 gem 'turbolinks',   '5.0.1'
 gem 'jbuilder',     '2.4.1'
 
+# Dragonfly and Avatar Magick
+gem 'dragonfly', '~> 1.0.11'
+gem 'avatar_magick', '~> 1.0.1'
+
 group :development, :test do
   gem 'sqlite3', '1.3.11'
   gem 'byebug',  '9.0.0', platform: :mri

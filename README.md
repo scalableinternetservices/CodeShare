@@ -20,3 +20,10 @@
 4. http://localhost:3000/feed
 5. http://localhost:3000/profile
 6. http://localhost:3000/posts/new
+
+###To get avatars working:
+* Run `brew install imagemagick ghostscript` or just install those 2 dependencies.
+	* https://github.com/bjedrocha/avatar_magick
+	* http://bjedrocha.com/rails/2016/01/06/default-gmail-style-avatars-in-rails/
+	* https://github.com/markevans/dragonfly
+	* http://markevans.github.io/dragonfly/imagemagick/
