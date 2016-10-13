@@ -13,8 +13,8 @@
 
 ###Working links:
 1. http://localhost:3000/
-..* unauthenticated users go to log in page
-..* authenticated users go to user "feed"
+⋅⋅* unauthenticated users go to log in page
+⋅⋅* authenticated users go to user "feed"
 2. http://localhost:3000/register
 3. http://localhost:3000/login
 4. http://localhost:3000/feed
