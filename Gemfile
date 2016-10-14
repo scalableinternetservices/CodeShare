@@ -7,6 +7,7 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootstrap_form'
+gem 'sqlite3', '1.3.11'
 
 gem 'uglifier',     '3.0.0'
 gem 'coffee-rails', '4.2.1'
@@ -17,11 +18,6 @@ gem 'jbuilder',     '2.4.1'
 # Dragonfly and Avatar Magick
 gem 'dragonfly', '~> 1.0.11'
 gem 'avatar_magick', '~> 1.0.1'
-
-group :development, :test do
-  gem 'mysql2', '0.4.4'
-  gem 'byebug',  '9.0.0', platform: :mri
-end
 
 group :development do
   gem 'web-console',           '3.1.1'
