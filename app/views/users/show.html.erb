@@ -2,3 +2,17 @@
 <!-- TODO check if user name is null -->
 <p><%= @user.first_name %> <%= @user.last_name %></p>
 <%= image_tag @avatar_url %>
+
+<!-- Get posts for that user -->
+<h3>Posts made by
+	<% if @user.first_name.present? %>
+		<%= @user.first_name %>
+	<% else %>
+		<%= @user.email %>
+	<% end %>
+</h3>
+<% @user.posts.each do |post| -%>
+	<p>Description: <%= post.description %></p>
+	<p>Snippit: <%= post.snippit %></p>
+	<hr>
+<% end -%>
