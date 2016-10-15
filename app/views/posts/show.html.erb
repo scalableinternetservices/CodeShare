@@ -15,7 +15,16 @@
   <%= @post.user.email %>
 </p>
 
+<br>
+
+<h3>Make new comment</h3>
+
+<%= render 'comments/form', comment: Comment.new, user_id:current_user.id, post_id: @post.id %>
+
+<br>
+
 <h3>Comments</h3>
+
 <p>
   <% @post.comments.each do |comment| %>
     <%= comment.user.first_name %> <%= comment.user.last_name %> at <%= comment.updated_at %>:<br/>
@@ -25,3 +34,4 @@
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
+
