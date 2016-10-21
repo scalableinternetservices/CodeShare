@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   	get 'register', to: 'devise/registrations#new'
   	get 'login', to: 'devise/sessions#new'
   	get 'index', to: 'pages#index'
-    get 'profile', to: 'users#show'
+    get 'profile/(:id)', to: 'users#show', as: 'profile'
   end
 
   # Avatar routes

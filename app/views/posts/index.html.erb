@@ -1,26 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Posts</h1>
+<h1 class="text-center">Snippits</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Description</th>
-      <th>Snippit</th>
+      <th>Title</th>
       <th>User</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= post.description %></td>
-        <td><%= post.snippit %></td>
-        <td><%= post.user.email %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><a href="<%= post_path(post) %>"><%= post.description %></a></td>
+        <td><a href="<%= profile_path(post.user.id) %>"><%= post.user.email %></td>
       </tr>
     <% end %>
   </tbody>
