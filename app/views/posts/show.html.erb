@@ -17,22 +17,29 @@
 
 <br>
 
+<h3>Comments</h3>
+
+<p>
+  <% if @post.comments.present? %>
+    <% @post.comments.each do |comment| %>
+      <%= comment.user.first_name %> <%= comment.user.last_name %> at <%= comment.updated_at %>:<br/>
+      <%= comment.comment %><br/><br/>
+    <% end %>
+  <% else %>
+    <p>There are currently no comments on this post.</p>
+  <% end %>
+</p>
+
+<br>
+
 <h3>Make new comment</h3>
 
 <%= render 'comments/form', comment: Comment.new, user_id:current_user.id, post_id: @post.id %>
 
 <br>
 
-<h3>Comments</h3>
-
-<p>
-  <% @post.comments.each do |comment| %>
-    <%= comment.user.first_name %> <%= comment.user.last_name %> at <%= comment.updated_at %>:<br/>
-    <%= comment.comment %><br/><br/>
-  <% end %>
-</p>
+<h3>Modify This Post</h3>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %> |
 <%= link_to 'Delete', post_path(@post), method: :delete %>
-
