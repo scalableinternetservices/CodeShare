@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# Tags
+Tag.create(name: "c")
+Tag.create(name: "c++")
+Tag.create(name: "java")
+Tag.create(name: "python")
+Tag.create(name: "ruby")
+Tag.create(name: "javascript")
+Tag.create(name: "ocaml")
+Tag.create(name: "c#")
