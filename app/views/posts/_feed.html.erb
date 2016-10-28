@@ -9,6 +9,7 @@
     <thead>
       <tr>
         <th>Title</th>
+        <th>Tags</th>
         <th>User</th>
         <th colspan="2"></th>
       </tr>
@@ -17,7 +18,8 @@
     <tbody>
       <% posts.each do |post| %>
         <tr>
-          <td><a href="<%= post_path(post) %>"><%= post.description %></a></td>
+          <td><a href="<%= post_path(post) %>"><%= truncate(post.snippit, :length => 30) %></a></td>
+          <td><p><%=raw post.all_tags%></p></td>
           <td><a href="<%= profile_path(post.user.id) %>"><%= post.user.email %></td>
         </tr>
       <% end %>
