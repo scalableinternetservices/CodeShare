@@ -1,0 +1,13 @@
+#app/views/photos/show.html.erb
+ 
+<div>
+  <strong>Title:</strong>
+  <%= @photo.title %>
+</div>
+<div>
+  <strong>Image:</strong>
+  <%= image_tag @photo.image.thumb('400x200#').url if @photo.image_stored? %>
+</div>
+ 
+<%= link_to 'Edit', edit_photo_path(@photo) %> |
+<%= link_to 'Back', photos_path %>
