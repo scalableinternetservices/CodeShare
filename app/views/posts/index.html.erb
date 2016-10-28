@@ -2,21 +2,36 @@
 
 <h1 class="text-center">Snippits</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>User</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
+<br>
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><a href="<%= post_path(post) %>"><%= post.description %></a></td>
-        <td><a href="<%= profile_path(post.user.id) %>"><%= post.user.email %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container">
+  <%= form_for_filterrific @filterrific do |f| %>
+    <div class="col-xs-6">
+      Search
+      <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+      <%= f.text_field(
+        :search_query,
+        class: 'filterrific-periodically-observed'
+      ) %>
+    </div>
+    <div>
+      Sorted by
+      <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+    </div>
+  <%#  <div>
+      <%= link_to(
+        'Reset filters',
+        reset_filterrific_url,
+      ) %>
+    </div>
+    <%# add an automated spinner to your form when the list is refreshed %>
+    <%= render_filterrific_spinner %>
+  <% end %>
+
+  <br>
+
+  <%= render(
+    partial: 'posts/feed',
+    locals: { posts: @posts }
+  ) %>
+</div>

@@ -4,7 +4,25 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @filterrific = initialize_filterrific(
+      Post,
+      params[:filterrific],
+      select_options: {
+        sorted_by: Post.options_for_sorted_by
+      },
+      persistence_id: 'shared_key',
+      default_filter_params: { sorted_by: 'name_asc' },
+      available_filters: [
+        :sorted_by,
+        :search_query
+      ],
+    ) or return
+    @posts = @filterrific.find.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /posts/1

@@ -1,0 +1,6 @@
+<%# app/views/posts/index.js.erb %>
+<% js = escape_javascript(
+  render(partial: 'posts/feed', locals: { posts: @posts })
+) %>
+console.log("<%= @posts.first.description %>");
+$("#filterrific_results").html("<%= js %>");
