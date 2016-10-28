@@ -34,7 +34,11 @@
 
 <h3>Make new comment</h3>
 
-<%= render 'comments/form', comment: Comment.new, user_id:current_user.id, post_id: @post.id %>
+<% if current_user %>
+  <%= render 'comments/form', comment: Comment.new, user_id:current_user.id, post_id: @post.id %>
+<% else %>
+  <p>You must be logged in to comment</p>
+<% end %>
 
 <br>
 
