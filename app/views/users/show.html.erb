@@ -2,8 +2,19 @@
 
 <!-- TODO check if user name is null -->
 <p><%= @user.first_name %> <%= @user.last_name %></p>
-<%= image_tag @avatar_url %>
+<div>
+	<%= image_tag @avatar_url %>
+</div>
 
+<!-- modify profile with settings-->
+<div class="settings">
+	<%= link_to "Settings", edit_path, class: "btn btn-primary"%>
+</div>
+
+<div class="settings">
+	<%= link_to "New", new_photo_path, class: "btn btn-primary"%>
+</div>
+<!-- bootstrap linking-->
 <!-- Get posts for that user -->
 <h3>Posts made by
 	<% if @user.first_name.present? %>
