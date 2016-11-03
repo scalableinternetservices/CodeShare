@@ -20,7 +20,7 @@
         <tr>
           <td><a href="<%= post_path(post) %>"><%= truncate(post.description, :length => 30) %></a></td>
           <td><p><%=raw post.all_tags%></p></td>
-          <td><a href="<%= profile_path(post.user.id) %>"><%= post.user.email %></td>
+          <td><a href="<%= profile_path(post.user.id) %>"><%= post.user.username %></td>
         </tr>
       <% end %>
     </tbody>

@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_many :posts
   has_many :comments
+  validates_uniqueness_of :username
+  validates_presence_of :username
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

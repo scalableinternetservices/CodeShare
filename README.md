@@ -39,3 +39,6 @@ Michael Wang: https://github.com/micwa
 	* http://bjedrocha.com/rails/2016/01/06/default-gmail-style-avatars-in-rails/
 	* https://github.com/markevans/dragonfly
 	* http://markevans.github.io/dragonfly/imagemagick/
+
+### Converting from email login to username login
+* https://rubyonrailshelp.wordpress.com/2014/01/07/adding-a-username-to-the-user-admin-model/
