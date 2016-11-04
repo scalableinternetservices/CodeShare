@@ -8,10 +8,18 @@
   <legend>Filters:</legend>
   <%= form_for_filterrific @filterrific do |f| %>
     <div class="col-xs-6">
-      Search
+      Search Posts
       <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
       <%= f.text_field(
         :search_query,
+        class: 'filterrific-periodically-observed'
+      ) %>
+    </div>
+    <div class="col-xs-6">
+      Search Tags
+      <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+      <%= f.text_field(
+        :tag_search_query,
         class: 'filterrific-periodically-observed'
       ) %>
     </div>

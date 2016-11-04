@@ -14,10 +14,12 @@ class PostsController < ApplicationController
       default_filter_params: { sorted_by: 'name_asc' },
       available_filters: [
         :sorted_by,
-        :search_query
+        :search_query,
+        :tag_search_query
       ],
     ) or return
     @posts = @filterrific.find.page(params[:page])
+    @tags = Tag.all
 
     respond_to do |format|
       format.html

@@ -21,13 +21,14 @@ class Post < ApplicationRecord
     default_filter_params: { sorted_by: 'name_asc' },
     available_filters: [
       :sorted_by,
-      :search_query
+      :search_query,
+      :tag_search_query
     ]
   )
 
   scope :search_query, lambda { |query|
 
-    return nil  if query.blank?
+    return nil if query.blank?
 
     terms = query.downcase.split(/\s+/)
 
@@ -39,6 +40,24 @@ class Post < ApplicationRecord
     where(
       terms.map { |term|
         "(LOWER(posts.description) LIKE ?)"
+      }.join(' AND '),
+      *terms.map { |e| [e] * num_or_conds }.flatten
+    )
+  }
+
+  scope :tag_search_query, lambda { |query|
+
+    return nil if query.blank?
+
+    terms = query.downcase.split(/\s+/)
+    puts terms
+
+    num_or_conds = 1
+    where(
+      terms.map { |term|
+        "("+Tag.find_by_name(term).posts.map { |post|
+          "posts.id == "+post.id.to_s
+        }.join(' OR ')+")"
       }.join(' AND '),
       *terms.map { |e| [e] * num_or_conds }.flatten
     )
