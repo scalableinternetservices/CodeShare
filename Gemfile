@@ -11,6 +11,7 @@ gem 'sqlite3', platforms: :ruby
 gem 'json'
 gem 'filterrific'
 gem 'will_paginate', '~> 3.1.0'
+gem 'multi_json', '1.7.8'
 
 gem 'uglifier',     '3.0.0'
 gem 'coffee-rails', '4.2.1'
