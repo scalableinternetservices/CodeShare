@@ -1,10 +1,10 @@
+<%= stylesheet_link_tag("feed") %>
+
 <p id="notice"><%= notice %></p>
 
-<h1 class="text-center">Snippits</h1>
-
-<br>
-
-<div class="well container">
+<h1 class="text-center">Latest Postings</h1>
+<br/>
+<div class="well well-sm container">
   <legend>Filters:</legend>
   <%= form_for_filterrific @filterrific do |f| %>
     <div class="col-xs-6">
