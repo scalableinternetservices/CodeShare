@@ -57,9 +57,12 @@ class Post < ApplicationRecord
     num_or_conds = 1
     where(
       terms.map { |term|
-        "("+Tag.find_by_name(term).posts.map { |post|
-          "posts.id == "+post.id.to_s
-        }.join(' OR ')+")"
+        tag = Tag.find_by_name(term)
+        if tag != nil
+          "("+Tag.find_by_name(term).posts.map { |post|
+            "posts.id == "+post.id.to_s
+          }.join(' OR ')+")"
+        end
       }.join(' AND '),
       *terms.map { |e| [e] * num_or_conds }.flatten
     )
