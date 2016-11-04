@@ -24,4 +24,14 @@ module ApplicationHelper
 		labeled_code = String(code)
 		return "``` " + language + "\n" + labeled_code + "\n```"
 	end
+
+	def get_tags_for_user(user)
+		tags = Set.new
+		user.posts.each do |post|
+		  post.tags.each do |tag|
+		  	tags.add(tag.name)
+		  end
+		end
+		return tags
+	end
 end

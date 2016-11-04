@@ -1,13 +1,11 @@
-<%= stylesheet_link_tag("feed") %>
-
 <p id="notice"><%= notice %></p>
 
 <h1 class="text-center">Latest Postings</h1>
 <br/>
-<div class="well well-sm container">
+<div class="well container">
   <legend>Filters:</legend>
   <%= form_for_filterrific @filterrific do |f| %>
-    <div class="col-xs-6">
+    <div class="col-xs-4">
       Search Posts
       <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
       <%= f.text_field(
@@ -15,7 +13,7 @@
         class: 'filterrific-periodically-observed'
       ) %>
     </div>
-    <div class="col-xs-6">
+    <div class="col-xs-4">
       Search Tags
       <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
       <%= f.text_field(
@@ -23,7 +21,7 @@
         class: 'filterrific-periodically-observed'
       ) %>
     </div>
-    <div>
+    <div class="col-xs-4">
       Sorted by
       <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
     </div>
