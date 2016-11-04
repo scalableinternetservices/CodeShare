@@ -92,20 +92,21 @@ while 1:
 	user_id: 1
 }]
 
-post_content.each do |content|
-	post = Post.create!({
-	  description: content[:description],
-	  snippit: content[:snippit],
-	  user_id: 1
-	})
-	tag_id_offset = rand(Tag.count)
-	rand_tag_id = Tag.offset(tag_id_offset).first.id
-	post.post_tags.create!(post_id: post.id, tag_id: rand_tag_id )
+(1..10).each do |i|
+	post_content.each do |content|
+		post = Post.create!({
+		  description: content[:description],
+		  snippit: content[:snippit],
+		  user_id: 1
+		})
+		tag_id_offset = rand(Tag.count)
+		rand_tag_id = Tag.offset(tag_id_offset).first.id
+		post.post_tags.create!(post_id: post.id, tag_id: rand_tag_id )
 
-	tag_id_offset = rand(Tag.count)
-	rand_tag_id = Tag.offset(tag_id_offset).first.id
-	post.post_tags.create!(post_id: post.id, tag_id: rand_tag_id )
+		tag_id_offset = rand(Tag.count)
+		rand_tag_id = Tag.offset(tag_id_offset).first.id
+		post.post_tags.create!(post_id: post.id, tag_id: rand_tag_id )
+	end
 end
 
-
-p "Created #{post_content.length} posts"
+p "Created #{post_content.length * 10} posts"
