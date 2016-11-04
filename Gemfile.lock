@@ -220,7 +220,6 @@ DEPENDENCIES
   jquery-turbolinks
   json
   listen (= 3.0.8)
-  multi_json (= 1.7.8)
   omniauth-facebook
   puma (= 3.4.0)
   rails (= 5.0.0.1)
