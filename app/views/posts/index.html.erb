@@ -2,35 +2,32 @@
 
 <h1 class="text-center">Latest Postings</h1>
 <br/>
-<div class="well container">
+<div class="well container" >
   <legend>Filters:</legend>
-  <%= form_for_filterrific @filterrific do |f| %>
+  <%= form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit' } do |f| %>
     <div class="col-xs-4">
       Search Posts
       <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
       <%= f.text_field(
-        :search_query,
-        class: 'filterrific-periodically-observed'
+        :search_query
       ) %>
     </div>
     <div class="col-xs-4">
       Search Tags
       <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
       <%= f.text_field(
-        :tag_search_query,
-        class: 'filterrific-periodically-observed'
+        :tag_search_query
       ) %>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-2">
       Sorted by
       <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
     </div>
-  <%#  <div>
-      <%= link_to(
-        'Reset filters',
-        reset_filterrific_url,
-      ) %>
+
+    <div class="col-xs-2">
+      <%= f.submit 'Filter' %>
     </div>
+
     <%# add an automated spinner to your form when the list is refreshed %>
     <%= render_filterrific_spinner %>
   <% end %>
