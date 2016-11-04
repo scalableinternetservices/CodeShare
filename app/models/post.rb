@@ -60,7 +60,7 @@ class Post < ApplicationRecord
         tag = Tag.find_by_name(term)
         if tag != nil
           "("+Tag.find_by_name(term).posts.map { |post|
-            "posts.id == "+post.id.to_s
+            "posts.id = "+post.id.to_s
           }.join(' OR ')+")"
         end
       }.join(' AND '),
