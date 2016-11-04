@@ -9,6 +9,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootstrap_form'
 gem 'sqlite3', platforms: :ruby
 gem 'json'
+gem 'multi_json', '1.7.8' 
 gem 'filterrific'
 gem 'will_paginate', '~> 3.1.0'
 
