@@ -6,10 +6,12 @@
 		<!-- Get posts for that user -->
 		<h3 class="page-header">Posts</h3>
 		<% @user.posts.each do |post| %>
-			<a href="<%= post_path(post) %>">
-				<h4 class="col-md-3"><%= post.description %></h4>
-			</a>
-			<div class="col-md-9 code-snippit"><%= markdown(post.snippit) %></div>
+			<div class="row">
+				<a class="col-md-3" href="<%= post_path(post) %>">
+					<h4><%= post.description %> <span class="badge"><%= post.comments.length %></span></h4>
+				</a>
+				<div class="col-md-9 code-snippit"><%= markdown(post.snippit) %></div>
+			</div>
 		<% end %>
 	</div>
 

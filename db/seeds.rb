@@ -7,11 +7,105 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Tags
-Tag.create(name: "c")
-Tag.create(name: "c++")
-Tag.create(name: "java")
-Tag.create(name: "python")
-Tag.create(name: "ruby")
-Tag.create(name: "javascript")
-Tag.create(name: "ocaml")
-Tag.create(name: "c#")
+Tag.delete_all
+tags = Tag.create!([{ name: 'numpy' },
+					{ name: 'pandas' },
+					{ name: 'python2' },
+					{ name: 'python3' },
+                    { name: 'django' },
+					{ name: 'mvc' },
+					{ name: 'debugging' },
+					{ name: 'pygame' },
+					{ name: 'flask' },
+					{ name: 'string.format' },                  
+					])
+
+# Posts
+Post.delete_all
+post_content = [{
+	description: "How to find number of rows of a huge csv file in pandas",
+	snippit: "import foo\nmethodToCall = getattr(foo, 'bar')\nresult = methodToCall()",
+	user_id: 1
+}, {
+	description: "python pygame blit. Getting an image to display",
+	snippit: "# import the relevant libraries
+import time
+import pygame
+import pygame.camera
+from pygame.locals import *
+# this is where one sets how long the script
+# sleeps for, between frames.sleeptime__in_seconds = 0.05
+# initialise the display window
+pygame.init()
+pygame.camera.init()
+
+screen = pygame.display.set_mode((640, 480), 0, 32)
+
+# set up a camera object
+cam = pygame.camera.Camera(0)
+# start the camera
+cam.start()
+
+while 1:
+    # sleep between every frame
+    time.sleep( 10 )
+    # fetch the camera image
+    image = cam.get_image()
+    # blank out the screen
+    screen.fill((0,0,2))
+    # copy the camera image to the screen
+    screen.blit( image, ( 0, 0 ) )
+    # update the screen to show the latest screen image
+    pygame.display.update()",
+	user_id: 1
+}, {
+	description: "given total returns and dividends, vectorize the implied price",
+	snippit: "while True:
+    for e in pygame.event.get():
+            if e.type==QUIT:        #break the loop and quit
+                    pygame.quit()
+                    sys.exit()
+                    break
+    
+    screen.fill((255,0,255))            #fill the screen with magenta
+    screen.blit(background_surface, (0,0))
+    display.update()",
+	user_id: 1
+}, {
+	description: "Get file extension from MIME type text/plain;charset=UTF-8 with mimetypes() library in Python",
+	snippit: "class ScrollBar:
+    # ... code ...
+    def render(self, display, x, y):
+        self.subSurface.blit(self.handle_image, (0, self.handle_pos))
+        self.subSurface.blit(self.upbtn_image, (0, 0))
+        self.subSurface.blit(self.dnbtn_image, (0, self.height - self.btn_height))
+        # ... other rendering operations
+        display.blit(self.subSurface, (x, y))",
+	user_id: 1
+}, {
+	description: "Unable to make high number of posts on remote machine vs local using asynio and aiohttp",
+	snippit: "self.subSurface.blit(self.image, (x, y)) ",
+	user_id: 1
+}, {
+	description: "Python3.5 send object over socket (Pygame cam image)",
+	snippit: "pygame.draw.rect(self.subSurface, color, rect)",
+	user_id: 1
+}]
+
+post_content.each do |content|
+	post = Post.create!({
+	  description: content[:description],
+	  snippit: content[:snippit],
+	  user_id: 1
+	})
+	tag_id_offset = rand(Tag.count)
+	rand_tag_id = Tag.offset(tag_id_offset).first.id
+	post.post_tags.create!(post_id: post.id, tag_id: rand_tag_id )
+
+	tag_id_offset = rand(Tag.count)
+	rand_tag_id = Tag.offset(tag_id_offset).first.id
+	post.post_tags.create!(post_id: post.id, tag_id: rand_tag_id )
+end
+
+
+p "Created #{post_content.length} posts"
