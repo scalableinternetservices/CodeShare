@@ -23,7 +23,7 @@ gem 'jbuilder',     '2.4.1'
 gem 'redcarpet', '~> 2.1.1'
 gem 'coderay', '~> 1.0.7'
 
-gem "avatarly"
+gem 'avatarly'
 # Dragonfly and Avatar Magick
 gem 'dragonfly', '~> 1.0.11'
 gem 'avatar_magick', '~> 1.0.1'
