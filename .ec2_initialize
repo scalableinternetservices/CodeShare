@@ -1,4 +1,4 @@
 sudo yum install -y patch
 sudo yum install -y sqlite-devel
-sudo yum install ImageMagick
+sudo yum install -y ImageMagick
 sudo sed -i "s/none/read|write/g" /etc/ImageMagick/policy.xml
