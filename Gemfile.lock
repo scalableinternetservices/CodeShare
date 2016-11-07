@@ -45,10 +45,6 @@ GEM
       execjs
     avatar_magick (1.0.2)
       dragonfly (~> 1.0)
-    avatarly (1.5.0)
-      rfc822
-      rmagick
-      unicode_utils
     bcrypt (3.1.11)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
@@ -167,8 +163,6 @@ GEM
     redcarpet (2.1.1)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
-    rfc822 (0.1.5)
-    rmagick (2.16.0)
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -198,7 +192,6 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
-    unicode_utils (1.4.0)
     warden (1.2.6)
       rack (>= 1.0)
     web-console (3.1.1)
@@ -215,7 +208,6 @@ PLATFORMS
 
 DEPENDENCIES
   avatar_magick (~> 1.0.1)
-  avatarly
   bootstrap-sass (~> 3.3.6)
   bootstrap_form
   coderay (~> 1.0.7)

@@ -18,7 +18,7 @@
 	<div class="col-md-3" style="position:fixed;right:0;">
 		<div class="user-show-image">
 			<%= image_tag @avatar_url %>
-			<%= avatar_name = @user.username
+<!-- 			<%= avatar_name = @user.username
 				if @user.first_name
 					avatar_name = @user.first_name
 				end
@@ -29,7 +29,7 @@
 				('<img src="data:image/jpg;base64,%s">' % Base64.encode64(
 				Avatarly.generate_avatar(avatar_name, 
 					opts = { size: 200, background_color: '#00695c' })
-				)).html_safe %>
+				)).html_safe %> -->
 
 		</div>
 		<div class="user-show-info">
