@@ -6,6 +6,24 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Users
+User.where.not(:id => [1]).delete_all
+user_count = 40
+(2..user_count).each do |i|
+	first = Faker::Name.first_name
+	last = Faker::Name.last_name
+
+	user = User.create!({
+		first_name: first,
+		last_name: last,
+		email: Faker::Internet.email,
+		username: Faker::Internet.user_name(first + " " + last, %w(. _ -)),
+		created_at: Faker::Time.between(30.days.ago, Time.now),
+		password: "foobar",
+		id: i
+	})
+end
+
 # Tags
 Tag.delete_all
 tags = Tag.create!([{ name: 'numpy' },
@@ -94,10 +112,12 @@ while 1:
 
 (1..10).each do |i|
 	post_content.each do |content|
+		userID = rand(user_count) % (user_count - 2) + 2
 		post = Post.create!({
-		  description: content[:description],
+		  description: Faker::Lorem.sentence,
 		  snippit: content[:snippit],
-		  user_id: 1
+		  created_at: Faker::Time.between(2.days.ago, Time.now),
+		  user_id: userID
 		})
 		tag_id_offset = rand(Tag.count)
 		rand_tag_id = Tag.offset(tag_id_offset).first.id
@@ -109,4 +129,4 @@ while 1:
 	end
 end
 
-p "Created #{post_content.length * 10} posts"
+p "Created #{user_count} users, #{post_content.length * 10} posts, and some tags."

@@ -18,6 +18,7 @@ gem 'jquery-rails', '4.1.1'
 gem 'turbolinks',   '5.0.1'
 gem 'jquery-turbolinks'
 gem 'jbuilder',     '2.4.1'
+gem 'faker'
 
 # Syntax hilighting
 gem 'redcarpet', '~> 2.1.1'
