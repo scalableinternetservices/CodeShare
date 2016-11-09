@@ -131,4 +131,19 @@ while 1:
 	end
 end
 
-p "Created #{user_count} users, #{post_content.length * 10} posts, and some tags."
+# Comments
+num_comments = 200
+(1..num_comments).each do |i|
+	userID = rand(user_count) % (user_count - 2) + 2
+
+	rand_post_id = Post.order("RANDOM()").limit(1).first.id
+
+	Comment.create!({
+		comment: Faker::Lorem.sentence,
+		created_at: Faker::Time.between(2.days.ago, Time.now),
+		user_id: userID,
+		post_id: rand_post_id
+	})
+end
+
+p "Created #{user_count} users, #{post_content.length * 10} posts, #{num_comments} comments, and some tags."
