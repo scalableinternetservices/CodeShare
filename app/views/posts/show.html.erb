@@ -34,7 +34,7 @@
 <p>
   <% if @post.comments.present? %>
     <% @post.comments.each do |comment| %>
-      <%= comment.user.first_name %> <%= comment.user.last_name %> at <%= comment.updated_at %>:<br/>
+      <a href="<%= profile_path(comment.user.id) %>"><%= comment.user.username %></a> at <%= comment.updated_at.strftime("%B %d, %Y") %>:<br/>
       <%= comment.comment %><br/><br/>
     <% end %>
   <% else %>

@@ -8,9 +8,10 @@
 		<% @user.posts.each do |post| %>
 			<div class="row">
 				<a class="col-md-3" href="<%= post_path(post) %>">
-					<h4><%= post.description %> <span class="badge"><%= post.comments.length %></span></h4>
+					<h4><%= post.description %></h4>
 				</a>
-				<div class="col-md-9 code-snippit"><%= markdown(post.snippit, post.language) %></div>
+				<div class="col-md-8 code-snippit"><%= markdown(post.snippit, post.language) %></div>
+				<div class="col-md-1"><span class="badge"><%= post.comments.length %></span></div>
 			</div>
 		<% end %>
 	</div>
