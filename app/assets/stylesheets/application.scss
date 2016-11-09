@@ -11,3 +11,24 @@ footer {
 .post-new-snippit-field textarea {
 	height: 300px;
 }
+
+.navbar {
+  width: 100%;
+}
+
+.navbar-button:hover {
+  color: blue;
+}
+
+.navbar-color {
+  background-color: #2196F3;
+}
+
+.navbar-button {
+  color: white !important;
+  margin: 10px;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: white !important;
+}
