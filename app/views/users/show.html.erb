@@ -10,7 +10,7 @@
 				<a class="col-md-3" href="<%= post_path(post) %>">
 					<h4><%= post.description %> <span class="badge"><%= post.comments.length %></span></h4>
 				</a>
-				<div class="col-md-9 code-snippit"><%= markdown(post.snippit) %></div>
+				<div class="col-md-9 code-snippit"><%= markdown(post.snippit, post.language) %></div>
 			</div>
 		<% end %>
 	</div>

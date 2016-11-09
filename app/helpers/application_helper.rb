@@ -5,7 +5,7 @@ module ApplicationHelper
 	  end
 	end
 
-	def markdown(text)
+	def markdown(text, language)
 	  coderayified = CodeRayify.new(:filter_html => true, 
 	                                :hard_wrap => true)
 	  options = {
@@ -17,12 +17,31 @@ module ApplicationHelper
 	    :superscript => true
 	  }
 	  markdown_to_html = Redcarpet::Markdown.new(coderayified, options)
-	  markdown_to_html.render(choose_language('python', text)).html_safe
+	  markdown_to_html.render(choose_language(language, text)).html_safe
 	end
 
 	def choose_language(language, code)
 		labeled_code = String(code)
-		return "``` " + language + "\n" + labeled_code + "\n```"
+		return "```" + match_name_to_language_tag(language) + "\n" + labeled_code + "\n```"
+	end
+
+	def match_name_to_language_tag(language)
+		case language
+		when "C++"
+			return 'cpp'
+		when "Python"
+			return 'python'
+		when "C"
+			return 'c'
+		when "Java"
+			return 'java'
+		when "JavaScript"
+		 	return 'javascript'
+		when "Objective-C"
+		 	return 'obj-c'
+		else
+			return 'python'
+		end
 	end
 
 	def get_tags_for_user(user)

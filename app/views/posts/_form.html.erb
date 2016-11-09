@@ -15,7 +15,9 @@
     <%= f.text_field :description, icon: "font" %>
   </div>
 
-  <div class="field">
+  <%= f.select(:language, options_for_select(['python', 'ruby', 'c++', 'c', 'java', 'javascript']), {}, {class: "form-control"}) %>
+
+  <div class="field post-new-snippit-field">
     <%= f.text_area :snippit, icon: "align-left" %>
   </div>
 

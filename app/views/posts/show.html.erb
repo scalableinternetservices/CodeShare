@@ -4,7 +4,7 @@
 <hr>
 
 <div class="row">
-  <div class="col-md-10 code-snippit"><%= markdown(@post.snippit) %></div>
+  <div class="col-md-10 code-snippit"><%= markdown(@post.snippit, @post.language) %></div>
 
   <div class=" col-md-2 post-show-info">
     <p>Posted by <a href="<%= profile_path(@post.user.id) %>"><%= @post.user.username %></a></p>

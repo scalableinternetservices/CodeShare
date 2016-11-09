@@ -35,11 +35,12 @@ tags = Tag.create!([{ name: 'numpy' },
 					{ name: 'debugging' },
 					{ name: 'pygame' },
 					{ name: 'flask' },
-					{ name: 'string.format' },                  
+					{ name: 'string.format' },
+					{ name: 'lambdas' }                  
 					])
 
 # Posts
-Post.delete_all
+Post.where.not(:user_id => [1]).delete_all
 post_content = [{
 	description: "How to find number of rows of a huge csv file in pandas",
 	snippit: "import foo\nmethodToCall = getattr(foo, 'bar')\nresult = methodToCall()",
@@ -117,7 +118,8 @@ while 1:
 		  description: Faker::Lorem.sentence,
 		  snippit: content[:snippit],
 		  created_at: Faker::Time.between(2.days.ago, Time.now),
-		  user_id: userID
+		  user_id: userID,
+		  language: 'python'
 		})
 		tag_id_offset = rand(Tag.count)
 		rand_tag_id = Tag.offset(tag_id_offset).first.id

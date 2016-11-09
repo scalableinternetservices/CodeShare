@@ -42,3 +42,6 @@ Michael Wang: https://github.com/micwa
 
 ### Converting from email login to username login
 * https://rubyonrailshelp.wordpress.com/2014/01/07/adding-a-username-to-the-user-admin-model/
+
+### Supported languages
+* https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
