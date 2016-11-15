@@ -8,6 +8,24 @@
 
   <div class=" col-md-2 post-show-info">
     <p>Posted by <a href="<%= profile_path(@post.user.id) %>"><%= @post.user.username %></a></p>
+
+    <!-- Upvote/downvotes -->
+    <div class="row post-votes">
+      <div class="col-md-6 post-vote-section">
+        <%= link_to like_post_path(@post), method: :put do %>
+          <span class="glyphicon glyphicon-thumbs-up"></span>
+        <% end %>
+        <span class="upvote-num"><%= @post.get_upvotes.size %></span>
+      </div>
+      <div class="col-md-6 post-vote-section">
+        <%= link_to dislike_post_path(@post), method: :put do %>
+          <span class="glyphicon glyphicon-thumbs-down"></span>
+        <% end %>
+        <span class="downvote-num"><%= @post.get_downvotes.size %></span>
+      </div>
+    </div>
+    <!-- end upvote/downvote -->
+
     <p>Last updated on <%= @post.updated_at.strftime("%B %d, %Y") %></p>
 
     <div class="post-show-action-btn">

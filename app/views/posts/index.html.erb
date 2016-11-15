@@ -2,6 +2,7 @@
 
 <h1 class="text-center">Latest Postings</h1>
 <br/>
+
 <div class="container" >
   <div class="well row">
     <legend>Filters:</legend>
@@ -10,21 +11,22 @@
         Search by Title:
         <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
         <%= f.text_field(
-          :search_query
+          :search_query,
+          class: 'filterrific-periodically-observed'
         ) %>
       </div>
       <div class="col-xs-4">
         Search by Tag:
         <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
         <%= f.text_field(
-          :tag_search_query
+          :tag_search_query,
+          class: 'filterrific-periodically-observed'
         ) %>
       </div>
       <div class="col-xs-3">
         Sort by Title:
         <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
       </div>
-
       <div class="col-xs-1">
         <%= f.submit 'Filter' %>
       </div>
