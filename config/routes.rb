@@ -15,6 +15,12 @@ Rails.application.routes.draw do
     get 'edit', to: 'devise/registrations#edit'
   end
 
+  resources :post do 
+    member do
+      put "like", to: "posts#upvote"
+      put "dislike", to: "posts#downvote"
+    end
+  end
 
 
   # Avatar routes

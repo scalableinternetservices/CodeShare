@@ -4,6 +4,16 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    @filterrific = init_filterrific()
+    @posts = Post.order(:cached_votes_score => :desc).page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def init_filterrific
     @filterrific = initialize_filterrific(
       Post,
       params[:filterrific],
@@ -18,6 +28,11 @@ class PostsController < ApplicationController
         :tag_search_query
       ],
     ) or return
+  end
+
+  def search
+    @filterrific = init_filterrific()
+
     @posts = @filterrific.find.page(params[:page])
     @tags = Tag.all
 
@@ -86,6 +101,18 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: 'You do not have the permissions to delete this post.' }
       end
     end
+  end
+
+  def upvote 
+    @post = Post.find(params[:id])
+    @post.upvote_by current_user
+    redirect_to @post
+  end
+
+  def downvote
+    @post = Post.find(params[:id])
+    @post.downvote_by current_user
+    redirect_to @post
   end
 
   private
