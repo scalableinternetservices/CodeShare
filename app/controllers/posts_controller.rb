@@ -5,7 +5,9 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @filterrific = init_filterrific()
-    @posts = Post.order(:cached_votes_score => :desc).page(params[:page])
+    puts @filterrific
+    # @posts = Post.order(:cached_votes_score => :desc).page(params[:page])
+    @posts = @filterrific.find.page(params[:page])
 
     respond_to do |format|
       format.html
@@ -20,26 +22,14 @@ class PostsController < ApplicationController
       select_options: {
         sorted_by: Post.options_for_sorted_by
       },
-      persistence_id: 'shared_key',
-      default_filter_params: { sorted_by: 'name_asc' },
+      persistence_id: false,
+      default_filter_params: { sorted_by: 'cached_votes_score_desc' },
       available_filters: [
         :sorted_by,
         :search_query,
         :tag_search_query
       ],
     ) or return
-  end
-
-  def search
-    @filterrific = init_filterrific()
-
-    @posts = @filterrific.find.page(params[:page])
-    @tags = Tag.all
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   # GET /posts/1

@@ -75,6 +75,8 @@ class Post < ApplicationRecord
     case sort_option.to_s
       when /^name_/
         order("LOWER(posts.description) #{ direction }")
+      when /^cached_votes_score_/
+        order("posts.cached_votes_score #{ direction }")
       else
         raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
@@ -83,7 +85,8 @@ class Post < ApplicationRecord
   def self.options_for_sorted_by
     [
       ['Name (a-z)', 'name_asc'],
-      ['Name (z-a)', 'name_desc']
+      ['Name (z-a)', 'name_desc'],
+      ['Cached Votes Score', 'cached_votes_score_desc']
     ]
   end
 
