@@ -3,7 +3,9 @@
   <table class="table">
     <thead>
       <tr>
+        <th>Votes</th>
         <th>Code Snippits</th>
+        <th>Tags</th>
         <th colspan="2"></th>
       </tr>
     </thead>
@@ -11,6 +13,18 @@
     <tbody>
       <% posts.each do |post| %>
         <tr class="post_row">
+          <td class="post_col">
+            <div class="row post-votes">
+              <div class="col-md-6 post-vote-section">
+                <span class="glyphicon glyphicon-thumbs-up"></span>
+                <span class="upvote-num"><%= post.get_upvotes.size %></span>
+              </div>
+              <div class="col-md-6 post-vote-section">
+                <span class="glyphicon glyphicon-thumbs-down"></span>
+                <span class="downvote-num"><%= post.get_downvotes.size %></span>
+              </div>
+            </div>
+          </td>
           <td class="post_col post_description_col">
             <a href="<%= post_path(post) %>"><%= post.description %></a>
             <div class="post-feed-postedby">

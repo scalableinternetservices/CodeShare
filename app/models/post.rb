@@ -38,6 +38,7 @@ class Post < ApplicationRecord
 
     terms = terms.map { |e|
       (e.gsub('*', '%') + '%').gsub(/%+/, '%')
+      e = "%"+e+"%"
     }
 
     num_or_conds = 1
@@ -84,9 +85,10 @@ class Post < ApplicationRecord
 
   def self.options_for_sorted_by
     [
-      ['Name (a-z)', 'name_asc'],
-      ['Name (z-a)', 'name_desc'],
-      ['Cached Votes Score', 'cached_votes_score_desc']
+      ['Title (a-z)', 'name_asc'],
+      ['Title (z-a)', 'name_desc'],
+      ['Most upvotes', 'cached_votes_score_desc'],
+      ['Most downvotes', 'cached_votes_score_asc']
     ]
   end
 
