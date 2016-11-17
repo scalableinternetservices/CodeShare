@@ -24,6 +24,8 @@ user_count = 40
 	})
 end
 
+p "Created #{user_count} users."
+
 # Tags
 Tag.delete_all
 tags = Tag.create!([{ name: 'numpy' },
@@ -38,6 +40,8 @@ tags = Tag.create!([{ name: 'numpy' },
 					{ name: 'string.format' },
 					{ name: 'lambdas' }                  
 					])
+
+p "Created some tags."
 
 # Posts
 Post.where.not(:user_id => [1]).delete_all
@@ -128,8 +132,24 @@ while 1:
 		tag_id_offset = rand(Tag.count)
 		rand_tag_id = Tag.offset(tag_id_offset).first.id
 		post.post_tags.create!(post_id: post.id, tag_id: rand_tag_id )
+
+		# gen upvotes
+		upvote_times = rand(50)
+		(1..upvote_times).each do |j|
+			userID = rand(user_count) % (user_count - 2) + 2
+			post.liked_by User.find(userID)
+		end
+
+		# gen downvotes
+		downvote_times = rand(50)
+		(1..downvote_times).each do |j|
+			userID = rand(user_count) % (user_count - 2) + 2
+			post.disliked_by User.find(userID)
+		end
 	end
 end
+
+p "Created #{post_content.length * 10} posts and some upvotes/downvotes."
 
 # Comments
 num_comments = 200
@@ -146,4 +166,6 @@ num_comments = 200
 	})
 end
 
-p "Created #{user_count} users, #{post_content.length * 10} posts, #{num_comments} comments, and some tags."
+p "Created #{num_comments} comments."
+
+p "DONE: Created #{user_count} users, #{post_content.length * 10} posts, #{num_comments} comments, some tags, and some upvotes/downvotes."

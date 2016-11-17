@@ -13,7 +13,7 @@
     <tbody>
       <% posts.each do |post| %>
         <tr class="post_row">
-          <td class="post_col">
+<!--           <td class="post_col">
             <div class="row post-votes">
               <div class="col-md-6 post-vote-section">
                 <span class="glyphicon glyphicon-thumbs-up"></span>
@@ -24,7 +24,7 @@
                 <span class="downvote-num"><%= post.get_downvotes.size %></span>
               </div>
             </div>
-          </td>
+          </td> -->
           <td class="post_col post_description_col">
             <a href="<%= post_path(post) %>"><%= post.description %></a>
             <div class="post-feed-postedby">
@@ -41,7 +41,7 @@
               <div class="post-stats">
                 <%= post.get_upvotes.size %>
               </div>
-              <div class="post-stats-label">Upvotes</div>
+              <div class="post-stats-label">Upvotes <span class="glyphicon glyphicon-thumbs-up"></span></div>
             </div>
           </td>
           <td>
