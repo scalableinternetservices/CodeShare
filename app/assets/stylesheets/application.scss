@@ -1,6 +1,11 @@
 @import "bootstrap-sprockets";
 @import "rails_bootstrap_forms";
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Catamaran');
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Catamaran', sans-serif;
+}
 
 // Footer styles
 footer {
@@ -8,25 +13,44 @@ footer {
 	height: 60px;
 }
 
+.post-feed-postedby {
+	font-size: 12px;
+}
+
 .post-new-snippit-field textarea {
 	height: 300px;
 }
 
+.post-show-avatar {
+	img {
+		border-radius: 100%;
+	}
+}
+
+.post-show-comments-table {
+	td {
+		padding: 5px;
+	}
+}
+
 .navbar {
   width: 100%;
+  padding: 5px 5px;
+  border: none;
+  border-radius: 0;
+  font-family: 'Catamaran', sans-serif;
 }
 
 .navbar-button:hover {
-  color: blue;
+  color: #4C4C47;
 }
 
 .navbar-color {
-  background-color: #2196F3;
+  background-color: #2D2D2A;
 }
 
 .navbar-button {
-  color: white !important;
-  margin: 10px;
+  color: #eeeeee!important;
 }
 
 .navbar-default .navbar-nav > li > a {
@@ -37,4 +61,25 @@ footer {
 	a {
 		text-decoration: none;
 	}
+}
+
+.post-stats-container {
+	background-color: #f5f5f5;
+	padding: 2px;
+
+	.post-stats {
+		width: 100%;
+		text-align: center;
+		border-bottom: 1px solid white;
+
+	}
+	.post-stats-label {
+		width: 100%;
+		font-size: 11px;
+		text-align: center;
+	}
+}
+
+.post-show-comment-body {
+	margin-left: 20px;
 }

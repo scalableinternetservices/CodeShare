@@ -1,4 +1,3 @@
-<!-- TODO check if user name is null -->
 <h2 class="page-header">Welcome, <%= @user.username %>!</h2>
 
 <div class="row">
@@ -9,16 +8,16 @@
 			<div class="row">
 				<a class="col-md-3" href="<%= post_path(post) %>">
 					<h4><%= post.description %></h4>
+					<span class="badge"><%= post.comments.length %> comments</span>
 				</a>
-				<div class="col-md-8 code-snippit"><%= markdown(post.snippit, post.language) %></div>
-				<div class="col-md-1"><span class="badge"><%= post.comments.length %></span></div>
+				<div class="col-md-9 code-snippit"><%= markdown(post.snippit, post.language) %></div>
 			</div>
 		<% end %>
 	</div>
 
 	<div class="col-md-3" style="position:fixed;right:0;">
 		<div class="user-show-image">
-			<%= image_tag @avatar_url %>
+			<%= image_tag make_avatar_url(@user) %>
 		</div>
 		<div class="user-show-info">
 			<p>Joined <%= @user.created_at.strftime("%B %d, %Y") %></p>

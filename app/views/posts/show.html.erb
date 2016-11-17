@@ -4,9 +4,10 @@
 <hr>
 
 <div class="row">
-  <div class="col-md-10 code-snippit"><%= markdown(@post.snippit, @post.language) %></div>
+  <div class="col-md-9 code-snippit"><%= markdown(@post.snippit, @post.language) %></div>
 
-  <div class=" col-md-2 post-show-info">
+  <div class="col-md-3 post-show-info">
+    <!-- User of post -->
     <p>Posted by <a href="<%= profile_path(@post.user.id) %>"><%= @post.user.username %></a></p>
 
     <!-- Upvote/downvotes -->
@@ -51,10 +52,21 @@
 
 <p>
   <% if @post.comments.present? %>
+    <table class="post-show-comments-table">
     <% @post.comments.each do |comment| %>
-      <a href="<%= profile_path(comment.user.id) %>"><%= comment.user.username %></a> at <%= comment.updated_at.strftime("%B %d, %Y") %>:<br/>
-      <%= comment.comment %><br/><br/>
+      <tr>
+        <td>    
+          <div class="post-show-avatar">
+            <%= image_tag make_avatar_url(@post.user, 25) %>
+          </div>
+        </td>
+        <td>
+          <a href="<%= profile_path(comment.user.id) %>"><%= comment.user.username %></a> <%= time_ago_in_words(comment.updated_at) %> ago<br>
+          <span class="post-show-comment-body"><%= comment.comment %></span>
+        </td>
+      </tr>
     <% end %>
+    </table>
   <% else %>
     <p>There are currently no comments on this post.</p>
   <% end %>

@@ -13,14 +13,30 @@
         <tr class="post_row">
           <td class="post_col post_description_col">
             <a href="<%= post_path(post) %>"><%= post.description %></a>
-            <div class="post_user">
-              Posted by <a href="<%= profile_path(post.user.id) %>"><%= post.user.username %></a> on <%= post.updated_at.strftime("%B %d, %Y") %>
+            <div class="post-feed-postedby">
+              Posted by <a href="<%= profile_path(post.user.id) %>"><%= post.user.username %></a> <%= time_ago_in_words(post.updated_at) %> ago
             </div>
           </td>
           <td class="post_col">
             <% post.tags.each do |tag| %>
-              <span class="label label-success"><%= tag.name %></span>
+              <span class="label label-info"><%= tag.name %></span>
             <% end %>
+          </td>
+          <td>
+            <div class="post-stats-container">
+              <div class="post-stats">
+                <%= post.get_upvotes.size %>
+              </div>
+              <div class="post-stats-label">Upvotes</div>
+            </div>
+          </td>
+          <td>
+            <div class="post-stats-container">
+              <div class="post-stats">
+                <%= post.comments.length %>
+              </div>
+              <div class="post-stats-label">Comments</div>
+            </div>
           </td>
         </tr>
       <% end %>
