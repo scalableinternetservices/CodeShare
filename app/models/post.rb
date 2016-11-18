@@ -22,7 +22,7 @@ class Post < ApplicationRecord
   end
 
   filterrific(
-    default_filter_params: { sorted_by: 'name_asc' },
+    default_filter_params: { sorted_by: 'time_desc' },
     available_filters: [
       :sorted_by,
       :search_query,
@@ -78,6 +78,8 @@ class Post < ApplicationRecord
         order("LOWER(posts.description) #{ direction }")
       when /^cached_votes_score_/
         order("posts.cached_votes_score #{ direction }")
+      when /^time_/
+        order("posts.created_at #{ direction }")
       else
         raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
@@ -88,7 +90,9 @@ class Post < ApplicationRecord
       ['Title (a-z)', 'name_asc'],
       ['Title (z-a)', 'name_desc'],
       ['Most upvotes', 'cached_votes_score_desc'],
-      ['Most downvotes', 'cached_votes_score_asc']
+      ['Most downvotes', 'cached_votes_score_asc'],
+      ['Newest first', 'time_desc'],
+      ['Oldest first', 'time_asc']
     ]
   end
 
