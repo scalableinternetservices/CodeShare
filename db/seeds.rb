@@ -156,7 +156,11 @@ num_comments = 200
 (1..num_comments).each do |i|
 	userID = rand(user_count) % (user_count - 2) + 2
 
-	rand_post_id = Post.order("RANDOM()").limit(1).first.id
+  if Rails.env.production?
+	  rand_post_id = Post.order("RAND()").limit(1).first.id
+  else
+	  rand_post_id = Post.order("RANDOM()").limit(1).first.id
+  end
 
 	Comment.create!({
 		comment: Faker::Lorem.sentence,
