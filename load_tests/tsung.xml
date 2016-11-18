@@ -33,7 +33,7 @@
   </options>
 
   <sessions>
-    <session name="http-example" probability="100" type="ts_http">
+    <session name="http-example" probability="50" type="ts_http">
 
       <!-- start out at the post feed -->
       <request>
@@ -176,6 +176,157 @@
 
       <!-- wait while posts are filtered -->
       <thinktime value="2" random="true"></thinktime>
+
+      <!-- go to the user's profile -->
+      <request>
+        <http url='/profile' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait while viewing the profile -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- edit the user's profile -->
+      <request>
+        <http url='/edit' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait while editing the profile -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- delete the user's account -->
+      <request subst="true">
+        <http
+          url='/users'
+          version='1.1'
+          method='POST'
+          contents='_method=delete'>
+        </http>
+      </request>
+
+      <!-- <setdynvars sourcetype="eval" code="fun( {Pid, DynVars} ) ->
+        io:format([126, $p, 126, $n, 126, $n], [DynVars]),
+        ok end.">
+        <var name="dump" />
+      </setdynvars> -->
+    </session>
+
+    <session name="http-example" probability="50" type="ts_http">
+
+      <!-- start out at the post feed -->
+      <request>
+        <http url='/' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait while viewing posts -->
+      <thinktime value="1" random="true"></thinktime>
+
+      <!-- go to the registration link -->
+      <request>
+        <http url='/users/sign_up' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait while filling out the form -->
+      <thinktime value="4" random="true"></thinktime>
+
+      <!-- Use a random number for the user ID -->
+      <setdynvars sourcetype="random_number" start="100"
+      end="9999999">
+        <var name="random_user_id" />
+      </setdynvars>
+
+      <!-- Create an account -->
+      <request subst="true">
+        <dyn_variable name="created_account_url" re="[Ll]ocation: (.*)\r"/>
+        <http
+          url='/users'
+          version='1.1'
+          method='POST'
+          contents='utf8=%E2%9C%93&amp;user%5Bemail%5D=%%_random_user_id%%%40test.com&amp;user%5Busername%5D=%%_random_user_id%%&amp;user%5Bfirst_name%5D=%%_random_user_id%%&amp;user%5Blast_name%5D=%%_random_user_id%%&amp;user%5Bpassword%5D=Test123&amp;user%5Bpassword_confirmation%5D=Test123&amp;commit=Sign+up'>
+        </http>
+      </request>
+
+      <!-- go to the post feed -->
+      <request>
+        <http url='/' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- browse feed -->
+      <thinktime value="20" random="true"></thinktime>
+
+      <!-- filter posts in the feed -->
+      <request subst="true">
+        <http
+          url='/posts'
+          version='1.1'
+          method='GET'
+          contents='utf8=%E2%9C%93&amp;search_query%5D=hello&amp;filterrific%5Btag_search_query%5D=python&amp;filterrific%5Bsorted_by%5D=cached_votes_score_desc&amp;commit=Filter'>
+        </http>
+      </request>
+
+      <!-- wait while posts are filtered -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- go to post w/ id 2 page -->
+      <request>
+        <http url='/posts/2' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait to look at post -->
+      <thinktime value="3" random="true"></thinktime>
+
+      <!-- like post with id 2 -->
+      <request>
+        <http url='/posts/2/like' version='1.1' method='PUT'></http>
+      </request>
+
+      <!-- create a comment -->
+      <request subst="true">
+        <http
+          url='/comments'
+          version='1.1'
+          method='POST'
+          contents='utf8=%E2%9C%93&amp;comment%5Bcomment%5D=a&amp;comment%5Buser_id%5D=1&amp;comment%5Bpost_id%5D=%%_created_post_id%%&amp;commit=Create+Comment'>
+        </http>
+      </request>
+
+      <!-- wait while reviewing comments -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- go to post creation page -->
+      <request>
+        <http url='/posts/new' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait while filling out a new post -->
+      <thinktime value="10" random="true"></thinktime>
+
+      <!-- create a post -->
+      <request subst="true">
+        <dyn_variable name="created_post_url" re="[Ll]ocation: (.*)\r"/>
+        <dyn_variable name="created_post_id" re="[Ll]ocation: .*/posts/(.*)\r"/>
+        <http
+          url='/posts'
+          version='1.1'
+          method='POST'
+          contents='utf8=%E2%9C%93&amp;post%5Bdescription%5D=This+is+a+post+description&amp;post%5Blanguage%5D=python&amp;post%5Bsnippit%5D=This+is+a+post+snippit&amp;post%5Ball_tags%5D=python%2C+post%2C+test&amp;commit=Create+Post'>
+        </http>
+      </request>
+
+      <!-- wait while viewing the post -->
+      <thinktime value="3" random="true"></thinktime>
+
+      <!-- delete the post -->
+      <request subst="true">
+        <http
+          url='/posts/%%_created_post_id%%'
+          version='1.1'
+          method='POST'
+          contents='_method=delete'>
+        </http>
+      </request>
+
+      <!-- wait while post is deleted -->
+      <thinktime value="1" random="true"></thinktime>
 
       <!-- go to the user's profile -->
       <request>
