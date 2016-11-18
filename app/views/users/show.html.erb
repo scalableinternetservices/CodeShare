@@ -22,12 +22,15 @@
 		<div class="user-show-info">
 			<p>Joined <%= @user.created_at.strftime("%B %d, %Y") %></p>
 			<p><%= @user.posts.length %> posts</p>
+			<br>
+			<legend>Tags</legend>
 			<div class="user-show-tags">
 				<% get_tags_for_user(@user).each do |tag| %>
 					<span class="label label-success"><%= tag %></span>
 			  	<% end %>
 		  	</div>
 		</div>
+		<% if @user.id == current_user.id %>
 		<br>
 		<div class="user-btns">
 			<a class="user-show-btn" href="<%= new_photo_path %>">
@@ -41,6 +44,7 @@
 				</button>
 			</a>
 		</div>
+		<% end %>
 
 	</div>
 </div>

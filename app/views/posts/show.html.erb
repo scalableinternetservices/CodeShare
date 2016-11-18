@@ -29,6 +29,7 @@
 
     <p>Last updated on <%= @post.updated_at.strftime("%B %d, %Y") %></p>
 
+    <% if @post.user.id == current_user.id %>
     <div class="post-show-action-btn">
       <a href="<%= edit_post_path(@post) %>">
         <button action="" type="button" class="btn btn-default btn-md">
@@ -43,6 +44,7 @@
         </button>
       </a>
     </div>
+    <% end %>
   </div>
 </div>
 
