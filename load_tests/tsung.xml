@@ -33,7 +33,7 @@
   </options>
 
   <sessions>
-    <session name="register-search-post" probability="50" type="ts_http">
+    <session name="register-search-post" probability="10" type="ts_http">
 
       <!-- start out at the post feed -->
       <request>
@@ -64,13 +64,13 @@
         <http url='/posts' version='1.1' method='GET'></http>
       </request>
 
-      <!-- filter posts in the feed (search for "e") -->
+      <!-- filter posts in the feed (search for "e", by most upvotes) -->
       <request subst="true">
         <http
           url='/posts'
           version='1.1'
           method='GET'
-          contents='utf8=%E2%9C%93&amp;search_query%5D=e&amp;filterrific%5Btag_search_query%5D=python&amp;filterrific%5Bsorted_by%5D=cached_votes_score_desc&amp;commit=Filter'>
+          contents='utf8=%E2%9C%93&amp;filterrific%5Bsearch_query%5D=e&amp;filterrific%5Btag_search_query%5D=&amp;filterrific%5Bsorted_by%5D=cached_votes_score_desc&amp;commit=Filter'>
         </http>
       </request>
 
@@ -83,6 +83,9 @@
       <request subst="true">
         <http url='/posts/%%_random_post_id%%' version='1.1' method='GET'></http>
       </request>
+
+      <!-- wait while viewing post -->
+      <thinktime value="2" random="true"></thinktime>
 
       <!-- create a comment -->
       <request subst="true">
@@ -130,7 +133,7 @@
       </request>
 
       <!-- wait for comments -->
-      <thinktime value="4" random="true"></thinktime>
+      <thinktime value="2" random="true"></thinktime>
 
       <!-- go back to created post -->
       <request subst="true">
@@ -169,6 +172,298 @@
           contents='_method=delete'>
         </http>
       </request>
+    </session>
+
+    <session name="many-searches" probability="50" type="ts_http">
+      <!-- login -->
+
+      <!-- generate random ids for posts -->
+      <setdynvars sourcetype="random_number" start="1" end="60">
+        <var name="random_post_id1" />
+      </setdynvars>
+      <setdynvars sourcetype="random_number" start="1" end="60">
+        <var name="random_post_id2" />
+      </setdynvars>
+      <setdynvars sourcetype="random_number" start="1" end="60">
+        <var name="random_post_id3" />
+      </setdynvars>
+
+      <!-- go to the posts feed -->
+      <request>
+        <http url='/posts' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- filter posts in the feed (search for "a", by most upvotes) -->
+      <request subst="true">
+        <http
+          url='/posts'
+          version='1.1'
+          method='GET'
+          contents='utf8=%E2%9C%93&amp;filterrific%5Bsearch_query%5D=a&amp;filterrific%5Btag_search_query%5D=&amp;filterrific%5Bsorted_by%5D=cached_votes_score_desc&amp;commit=Filter'>
+        </http>
+      </request>
+
+      <!-- view post -->
+      <request subst="true">
+        <http url='/posts/%%_random_post_id1%%' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait while viewing post -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- create a comment -->
+      <request subst="true">
+        <http
+          url='/comments'
+          version='1.1'
+          method='POST'
+          contents='utf8=%E2%9C%93&amp;comment%5Bcomment%5D=a&amp;comment%5Buser_id%5D=1&amp;comment%5Bpost_id%5D=%%_random_post_id1%%&amp;commit=Create+Comment'>
+        </http>
+      </request>
+
+      <!-- upvote the post -->
+      <request subst="true">
+        <http
+          url='/posts/%%_random_post_id1%%/like'
+          version='1.1'
+          method='POST'
+          contents='_method=put'>
+        </http>
+      </request>
+
+      <!-- go to the posts feed -->
+      <request>
+        <http url='/posts' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- filter posts in the feed (search for "a", tag "python", by most upvotes) -->
+      <request subst="true">
+        <http
+          url='/posts'
+          version='1.1'
+          method='GET'
+          contents='utf8=%E2%9C%93&amp;filterrific%5Bsearch_query%5D=a&amp;filterrific%5Btag_search_query%5D=python&amp;filterrific%5Bsorted_by%5D=cached_votes_score_desc&amp;commit=Filter'>
+        </http>
+      </request>
+
+      <!-- view post -->
+      <request subst="true">
+        <http url='/posts/%%_random_post_id2%%' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait while viewing post -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- create a comment -->
+      <request subst="true">
+        <http
+          url='/comments'
+          version='1.1'
+          method='POST'
+          contents='utf8=%E2%9C%93&amp;comment%5Bcomment%5D=a&amp;comment%5Buser_id%5D=1&amp;comment%5Bpost_id%5D=%%_random_post_id2%%&amp;commit=Create+Comment'>
+        </http>
+      </request>
+
+      <!-- downvote the post -->
+      <request subst="true">
+        <http
+          url='/posts/%%_random_post_id2%%/dislike'
+          version='1.1'
+          method='POST'
+          contents='_method=put'>
+        </http>
+      </request>
+
+      <!-- go to the posts feed -->
+      <request>
+        <http url='/posts' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- filter posts in the feed by newest post -->
+      <request subst="true">
+        <http
+          url='/posts'
+          version='1.1'
+          method='GET'
+          contents='utf8=%E2%9C%93&amp;filterrific%5Bsearch_query%5D=&amp;filterrific%5Btag_search_query%5D=python&amp;filterrific%5Bsorted_by%5D=time_desc&amp;commit=Filter'>
+        </http>
+      </request>
+
+      <!-- view post -->
+      <request subst="true">
+        <http url='/posts/%%_random_post_id3%%' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait while viewing post -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- create a comment -->
+      <request subst="true">
+        <http
+          url='/comments'
+          version='1.1'
+          method='POST'
+          contents='utf8=%E2%9C%93&amp;comment%5Bcomment%5D=a&amp;comment%5Buser_id%5D=1&amp;comment%5Bpost_id%5D=%%_random_post_id3%%&amp;commit=Create+Comment'>
+        </http>
+      </request>
+
+      <!-- upvote the post -->
+      <request subst="true">
+        <http
+          url='/posts/%%_random_post_id3%%/like'
+          version='1.1'
+          method='POST'
+          contents='_method=put'>
+        </http>
+      </request>
+
+      <!-- logout -->
+    </session>
+
+    <session name="casually-browse" probability="50" type="ts_http">
+      <!-- login -->
+
+      <!-- generate random ids for posts -->
+      <setdynvars sourcetype="random_number" start="1" end="60">
+        <var name="random_post_id1" />
+      </setdynvars>
+      <setdynvars sourcetype="random_number" start="1" end="60">
+        <var name="random_post_id2" />
+      </setdynvars>
+      <setdynvars sourcetype="random_number" start="1" end="60">
+        <var name="random_post_id3" />
+      </setdynvars>
+
+      <!-- go to the posts feed -->
+      <request>
+        <http url='/posts' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- filter posts in the feed by newest post -->
+      <request subst="true">
+        <http
+          url='/posts'
+          version='1.1'
+          method='GET'
+          contents='utf8=%E2%9C%93&amp;filterrific%5Bsearch_query%5D=&amp;filterrific%5Btag_search_query%5D=python&amp;filterrific%5Bsorted_by%5D=time_desc&amp;commit=Filter'>
+        </http>
+      </request>
+
+      <!-- view post -->
+      <request subst="true">
+        <http url='/posts/%%_random_post_id1%%' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait while viewing post -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- create a comment -->
+      <request subst="true">
+        <http
+          url='/comments'
+          version='1.1'
+          method='POST'
+          contents='utf8=%E2%9C%93&amp;comment%5Bcomment%5D=a&amp;comment%5Buser_id%5D=1&amp;comment%5Bpost_id%5D=%%_random_post_id1%%&amp;commit=Create+Comment'>
+        </http>
+      </request>
+
+      <!-- upvote the post -->
+      <request subst="true">
+        <http
+          url='/posts/%%_random_post_id1%%/like'
+          version='1.1'
+          method='POST'
+          contents='_method=put'>
+        </http>
+      </request>
+
+      <!-- go to the posts feed -->
+      <request>
+        <http url='/posts' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- filter posts in the feed by newest post -->
+      <request subst="true">
+        <http
+          url='/posts'
+          version='1.1'
+          method='GET'
+          contents='utf8=%E2%9C%93&amp;filterrific%5Bsearch_query%5D=&amp;filterrific%5Btag_search_query%5D=python&amp;filterrific%5Bsorted_by%5D=time_desc&amp;commit=Filter'>
+        </http>
+      </request>
+
+      <!-- view post -->
+      <request subst="true">
+        <http url='/posts/%%_random_post_id2%%' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait while viewing post -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- create a comment -->
+      <request subst="true">
+        <http
+          url='/comments'
+          version='1.1'
+          method='POST'
+          contents='utf8=%E2%9C%93&amp;comment%5Bcomment%5D=a&amp;comment%5Buser_id%5D=1&amp;comment%5Bpost_id%5D=%%_random_post_id2%%&amp;commit=Create+Comment'>
+        </http>
+      </request>
+
+      <!-- upvote the post -->
+      <request subst="true">
+        <http
+          url='/posts/%%_random_post_id2%%/like'
+          version='1.1'
+          method='POST'
+          contents='_method=put'>
+        </http>
+      </request>
+
+      <!-- go to the posts feed -->
+      <request>
+        <http url='/posts' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- filter posts in the feed by newest post -->
+      <request subst="true">
+        <http
+          url='/posts'
+          version='1.1'
+          method='GET'
+          contents='utf8=%E2%9C%93&amp;filterrific%5Bsearch_query%5D=&amp;filterrific%5Btag_search_query%5D=python&amp;filterrific%5Bsorted_by%5D=time_desc&amp;commit=Filter'>
+        </http>
+      </request>
+
+      <!-- view post -->
+      <request subst="true">
+        <http url='/posts/%%_random_post_id3%%' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait while viewing post -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- create a comment -->
+      <request subst="true">
+        <http
+          url='/comments'
+          version='1.1'
+          method='POST'
+          contents='utf8=%E2%9C%93&amp;comment%5Bcomment%5D=a&amp;comment%5Buser_id%5D=1&amp;comment%5Bpost_id%5D=%%_random_post_id3%%&amp;commit=Create+Comment'>
+        </http>
+      </request>
+
+      <!-- upvote the post -->
+      <request subst="true">
+        <http
+          url='/posts/%%_random_post_id3%%/like'
+          version='1.1'
+          method='POST'
+          contents='_method=put'>
+        </http>
+      </request>
+
+      <!-- logout -->
     </session>
   </sessions>
 </tsung>
