@@ -341,7 +341,7 @@
       </request>
     </session>
 
-    <session name="casually-browse" probability="50" type="ts_http">
+    <session name="casually-browse" probability="40" type="ts_http">
       <!-- generate random user -->
       <setdynvars sourcetype="random_number" start="1" end="40">
         <var name="random_user" />
