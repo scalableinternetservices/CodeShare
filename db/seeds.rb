@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Users
-User..delete_all
+User.delete_all
 user_count = 40
 (1..user_count).each do |i|
 	user = User.create!({
