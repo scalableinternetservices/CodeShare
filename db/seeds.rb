@@ -7,17 +7,14 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Users
-User.where.not(:id => [1]).delete_all
+User..delete_all
 user_count = 40
-(2..user_count).each do |i|
-	first = Faker::Name.first_name
-	last = Faker::Name.last_name
-
+(1..user_count).each do |i|
 	user = User.create!({
-		first_name: first,
-		last_name: last,
-		email: Faker::Internet.email,
-		username: Faker::Internet.user_name(first + " " + last, %w(. _ -)),
+		first_name: i.to_s,
+		last_name: i.to_s,
+		email: i.to_s + "@a.com",
+		username: i.to_s,
 		created_at: Faker::Time.between(30.days.ago, Time.now),
 		password: "foobar",
 		id: i
