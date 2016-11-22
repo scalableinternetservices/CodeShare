@@ -35,6 +35,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    fresh_when([@post, @post.comments, @post.get_upvotes])
   end
 
   # GET /posts/new
