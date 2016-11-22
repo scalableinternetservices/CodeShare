@@ -5,13 +5,13 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @filterrific = init_filterrific()
-    puts @filterrific
-    # @posts = Post.order(:cached_votes_score => :desc).page(params[:page])
     @posts = @filterrific.find.page(params[:page])
 
-    respond_to do |format|
-      format.html
-      format.js
+    if stale?([@posts, current_user])
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
   end
 
