@@ -13,47 +13,37 @@
 
     <tbody>
       <% posts.each do |post| %>
-        <tr class="post_row">
-<!--           <td class="post_col">
-            <div class="row post-votes">
-              <div class="col-md-6 post-vote-section">
-                <span class="glyphicon glyphicon-thumbs-up"></span>
-                <span class="upvote-num"><%= post.get_upvotes.size %></span>
+        <% cache post do %>
+          <tr class="post_row">
+            <td class="post_col post_description_col">
+              <a href="<%= post_path(post) %>"><%= post.description %></a>
+              <div class="post-feed-postedby">
+                Posted by <a href="<%= profile_path(post.user.id) %>"><%= post.user.username %></a> <%= time_ago_in_words(post.updated_at) %> ago
               </div>
-              <div class="col-md-6 post-vote-section">
-                <span class="glyphicon glyphicon-thumbs-down"></span>
-                <span class="downvote-num"><%= post.get_downvotes.size %></span>
+            </td>
+            <td class="post_col">
+              <% post.tags.each do |tag| %>
+                <span class="label label-info"><%= tag.name %></span>
+              <% end %>
+            </td>
+            <td>
+              <div class="post-stats-container">
+                <div class="post-stats">
+                  <%= post.cached_votes_up %>
+                </div>
+                <div class="post-stats-label">Upvotes <span class="glyphicon glyphicon-thumbs-up"></span></div>
               </div>
-            </div>
-          </td> -->
-          <td class="post_col post_description_col">
-            <a href="<%= post_path(post) %>"><%= post.description %></a>
-            <div class="post-feed-postedby">
-              Posted by <a href="<%= profile_path(post.user.id) %>"><%= post.user.username %></a> <%= time_ago_in_words(post.updated_at) %> ago
-            </div>
-          </td>
-          <td class="post_col">
-            <% post.tags.each do |tag| %>
-              <span class="label label-info"><%= tag.name %></span>
-            <% end %>
-          </td>
-          <td>
-            <div class="post-stats-container">
-              <div class="post-stats">
-                <%= post.get_upvotes.size %>
+            </td>
+            <td>
+              <div class="post-stats-container">
+                <div class="post-stats">
+                  <%= post.comments.length %>
+                </div>
+                <div class="post-stats-label">Comments</div>
               </div>
-              <div class="post-stats-label">Upvotes <span class="glyphicon glyphicon-thumbs-up"></span></div>
-            </div>
-          </td>
-          <td>
-            <div class="post-stats-container">
-              <div class="post-stats">
-                <%= post.comments.length %>
-              </div>
-              <div class="post-stats-label">Comments</div>
-            </div>
-          </td>
-        </tr>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
