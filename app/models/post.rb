@@ -55,20 +55,29 @@ class Post < ApplicationRecord
     return nil if query.blank?
 
     terms = query.downcase.split(/\s+/)
-    puts terms
 
-    num_or_conds = 1
-    where(
-      terms.map { |term|
-        tag = Tag.find_by_name(term)
-        if tag != nil
-          "("+Tag.find_by_name(term).posts.map { |post|
-            "posts.id = "+post.id.to_s
-          }.join(' OR ')+")"
-        end
-      }.join(' AND '),
-      *terms.map { |e| [e] * num_or_conds }.flatten
-    )
+    post_tags = PostTag.arel_table
+    posts = Post.arel_table
+    terms.map{|term| Tag.find_by_name(term).id}.inject(self) { |rel, tag_id|
+      rel.where(
+        PostTag.where(post_tags[:post_id].eq(posts[:id])) \
+               .where(post_tags[:tag_id].eq(tag_id)) \
+               .exists
+      )
+    }
+
+#     num_or_conds = 1
+#     where(
+#       terms.map { |term|
+#         tag = Tag.find_by_name(term)
+#         if tag != nil
+#           "("+Tag.find_by_name(term).posts.map { |post|
+#             "posts.id = "+post.id.to_s
+#           }.join(' OR ')+")"
+#         end
+#       }.join(' AND '),
+#       *terms.map { |e| [e] * num_or_conds }.flatten
+#     )
   }
 
   scope :sorted_by, lambda { |sort_option|
