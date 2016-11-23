@@ -61,6 +61,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.2)
+    dalli (2.7.6)
     debug_inspector (0.0.2)
     devise (4.2.0)
       bcrypt (~> 3.0)
@@ -216,6 +217,7 @@ DEPENDENCIES
   bootstrap_form
   coderay (~> 1.0.7)
   coffee-rails (= 4.2.1)
+  dalli
   devise
   dragonfly (~> 1.0.11)
   faker
@@ -240,4 +242,4 @@ DEPENDENCIES
   will_paginate (~> 3.1.0)
 
 BUNDLED WITH
-   1.13.1
+   1.13.2

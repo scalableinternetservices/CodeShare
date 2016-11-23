@@ -20,6 +20,7 @@ gem 'jquery-turbolinks'
 gem 'jbuilder',     '2.4.1'
 gem 'faker'
 gem 'acts_as_votable', '~> 0.10.0'
+gem 'dalli'
 
 # Syntax hilighting
 gem 'redcarpet', '~> 2.1.1'
