@@ -1,0 +1,2 @@
+class DummyMutex < ApplicationRecord
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115074733) do
+ActiveRecord::Schema.define(version: 20161123042540) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "comment"
@@ -20,6 +20,12 @@ ActiveRecord::Schema.define(version: 20161115074733) do
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "dummy_mutexes", force: :cascade do |t|
+    t.integer  "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "photos", force: :cascade do |t|
@@ -60,6 +66,13 @@ ActiveRecord::Schema.define(version: 20161115074733) do
     t.index ["cached_weighted_score"], name: "index_posts_on_cached_weighted_score"
     t.index ["cached_weighted_total"], name: "index_posts_on_cached_weighted_total"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "posts_tags", id: false, force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "tag_id",  null: false
+    t.index ["post_id"], name: "index_posts_tags_on_post_id"
+    t.index ["tag_id"], name: "index_posts_tags_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|
