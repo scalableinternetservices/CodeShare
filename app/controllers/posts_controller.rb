@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @filterrific = init_filterrific()
-    @posts = @filterrific.find.page(params[:page])
+    @posts = @filterrific.find.page(params[:page]).includes(:comments, :user, :tags)
 
     if stale?([@posts, current_user])
       respond_to do |format|
