@@ -22,7 +22,7 @@ class Post < ApplicationRecord
   end
 
   filterrific(
-    default_filter_params: { sorted_by: 'time_desc' },
+    default_filter_params: { sorted_by: 'cached_votes_up_desc' },
     available_filters: [
       :sorted_by,
       :search_query,
@@ -85,8 +85,8 @@ class Post < ApplicationRecord
     case sort_option.to_s
       when /^name_/
         order("LOWER(posts.description) #{ direction }")
-      when /^cached_votes_score_/
-        order("posts.cached_votes_score #{ direction }")
+      when /^cached_votes_up_/
+        order("posts.cached_votes_up #{ direction }")
       when /^time_/
         order("posts.created_at #{ direction }")
       else
@@ -98,8 +98,8 @@ class Post < ApplicationRecord
     [
       ['Title (a-z)', 'name_asc'],
       ['Title (z-a)', 'name_desc'],
-      ['Most upvotes', 'cached_votes_score_desc'],
-      ['Most downvotes', 'cached_votes_score_asc'],
+      ['Most upvotes', 'cached_votes_up_desc'],
+      ['Least upvotes', 'cached_votes_up_asc'],
       ['Newest first', 'time_desc'],
       ['Oldest first', 'time_asc']
     ]

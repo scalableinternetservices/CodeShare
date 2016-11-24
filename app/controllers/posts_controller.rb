@@ -23,7 +23,7 @@ class PostsController < ApplicationController
         sorted_by: Post.options_for_sorted_by
       },
       persistence_id: false,
-      default_filter_params: { sorted_by: 'cached_votes_score_desc' },
+      default_filter_params: { sorted_by: 'cached_votes_up_desc' },
       available_filters: [
         :sorted_by,
         :search_query,
