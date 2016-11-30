@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<% cache @post do %>
+<% cache [@post, current_user] do %>
   <h2><%= @post.description %></h2>
   <hr>
   
