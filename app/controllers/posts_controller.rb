@@ -6,13 +6,6 @@ class PostsController < ApplicationController
   def index
     @filterrific = init_filterrific()
     @posts = @filterrific.find.page(params[:page]).includes(:comments, :user, :tags)
-
-    if stale?([@posts, current_user])
-      respond_to do |format|
-        format.html
-        format.js
-      end
-    end
   end
 
   def init_filterrific

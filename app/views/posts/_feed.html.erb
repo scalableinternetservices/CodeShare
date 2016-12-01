@@ -13,7 +13,6 @@
 
     <tbody>
       <% posts.each do |post| %>
-        <% cache post do %>
           <tr class="post_row">
             <td class="post_col post_description_col">
               <a href="<%= post_path(post) %>"><%= post.description %></a>
@@ -43,7 +42,6 @@
               </div>
             </td>
           </tr>
-        <% end %>
       <% end %>
     </tbody>
   </table>
