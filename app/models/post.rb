@@ -88,7 +88,7 @@ class Post < ApplicationRecord
       when /^cached_votes_up_/
         order("posts.cached_votes_up #{ direction }")
       when /^time_/
-        order("posts.created_at #{ direction }")
+        order("posts.updated_at #{ direction }")
       else
         raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
